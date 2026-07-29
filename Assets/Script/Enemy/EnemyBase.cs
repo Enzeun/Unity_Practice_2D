@@ -1,7 +1,9 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -56,17 +58,18 @@ public class EnemyBase : MonoBehaviour
     [BoxGroup("Current Status"), ReadOnly, ShowInInspector]
     private bool isMoving;
 
-    private void OnEnable()
-    {
-        Initialize(_player);
-    }
 
-    public void Initialize(PlayerBase player)
+    private ObjectPool<EnemyBase> myPool;
+
+    
+
+    public void Initialize(PlayerBase player, ObjectPool<EnemyBase> pool)
     {
         if (_player == null)
         {
             _player = player;
         }
+        myPool = pool;
         canMove = true;
         isDead = false;
         isLookRight = true;
@@ -123,7 +126,8 @@ public class EnemyBase : MonoBehaviour
 
         PlayDieAnimation();
 
-        OnDie?.Invoke();
+        OnDie?.Invoke(this);
+
     }
 
     private void PlayDieAnimation()
@@ -131,7 +135,8 @@ public class EnemyBase : MonoBehaviour
         myAnimator.SetBool(DieHash, isDead);
     }
 
-    public Action OnDie;
+    
+    public Action<EnemyBase> OnDie;
 
     //-------------------------------------------------------------------------------------
 
