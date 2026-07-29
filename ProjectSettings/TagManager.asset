@@ -2,17 +2,19 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Map
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -41,3 +43,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 932888631
+    locked: 0
+  - name: Middleground
+    uniqueID: 2816926727
+    locked: 0
+  - name: Player
+    uniqueID: 2790904233
+    locked: 0
+  - name: Enemy
+    uniqueID: 1941051831
+    locked: 0
+  - name: Particle
+    uniqueID: 2205129781
+    locked: 0
+  m_RenderingLayers:
+  - Default
