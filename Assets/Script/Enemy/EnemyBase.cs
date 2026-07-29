@@ -16,8 +16,8 @@ public class EnemyBase : MonoBehaviour
     private Animator myAnimator;
 
     // 애니메이션 해시
-    private static int MovingHash = Animator.StringToHash("IsMoving");
-    private static int DieHash = Animator.StringToHash("IsDead");
+    private static readonly int MovingHash = Animator.StringToHash("IsMoving");
+    private static readonly int DieHash = Animator.StringToHash("IsDead");
 
     // 몬스터 스탯 필드
     [BoxGroup("Enemy Status"), ShowInInspector]
@@ -25,7 +25,7 @@ public class EnemyBase : MonoBehaviour
     [BoxGroup("Enemy Status"), ShowInInspector]
     public float hp { get; private set; } = 100f;
     [BoxGroup("Enemy Status"), ShowInInspector]
-    public float movementSpeed = 1f;
+    public float movementSpeed { get; private set; } = 1f;
     [BoxGroup("Enemy Status"), ShowInInspector]
     public bool isDead { get; private set; } = false;
     [BoxGroup("Enemy Status"), ShowInInspector]
@@ -39,7 +39,7 @@ public class EnemyBase : MonoBehaviour
     [BoxGroup("Enemy Status"), SerializeField]
     private float attackDelay = 1f;
     [BoxGroup("Enemy Status"), SerializeField]
-    private float attackTimer;
+    private float attackTimer = 0;
 
 
     // 현재 상태들
@@ -56,9 +56,17 @@ public class EnemyBase : MonoBehaviour
     [BoxGroup("Current Status"), ReadOnly, ShowInInspector]
     private bool isMoving;
 
+    private void OnEnable()
+    {
+        Initialize(_player);
+    }
+
     public void Initialize(PlayerBase player)
     {
-        _player = player;
+        if (_player == null)
+        {
+            _player = player;
+        }
         canMove = true;
         isDead = false;
         isLookRight = true;
@@ -67,7 +75,6 @@ public class EnemyBase : MonoBehaviour
         attackTimer = attackDelay;
         hp = maxHp;
         myAnimator.SetBool(DieHash, false);
-
     }
 
     private void Update()
@@ -106,9 +113,13 @@ public class EnemyBase : MonoBehaviour
     [BoxGroup("메서드 디버깅"), Button]
     private void Die()
     {
+        if (isDead) return;
+
         canMove = false;
 
         isDead = true;
+
+        myRigidbody.linearVelocity = Vector2.zero;
 
         PlayDieAnimation();
 
@@ -117,7 +128,7 @@ public class EnemyBase : MonoBehaviour
 
     private void PlayDieAnimation()
     {
-        myAnimator.SetBool(DieHash, true);
+        myAnimator.SetBool(DieHash, isDead);
     }
 
     public Action OnDie;
@@ -171,6 +182,7 @@ public class EnemyBase : MonoBehaviour
             {
                 isMoving = false;
                 SetMovingAnimation();
+                myRigidbody.linearVelocity = Vector2.zero;
             }
             return;
         }
@@ -198,21 +210,16 @@ public class EnemyBase : MonoBehaviour
 
         if (isInAttackRange)
         {
-            attackTimer -= Time.deltaTime;
-
             if (attackTimer <= 0)
             {
                 AttackPlayer(attackPower);
                 attackTimer = attackDelay;
+
                 return;
             }
         }
+        attackTimer -= Time.deltaTime;
 
-        if (attackTimer != attackDelay)
-        {
-            attackTimer = attackDelay;
-            return;
-        }
     }
 
     [BoxGroup("메서드 디버깅"), Button]

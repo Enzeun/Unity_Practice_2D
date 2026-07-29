@@ -608,6 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6224fa86aa4e841a255f2884eac18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
+  _myAnimator: {fileID: 11790976}
   myDOTween: {fileID: 825131766}
 --- !u!1 &307117853
 GameObject:
@@ -52111,7 +52112,7 @@ Animator:
   m_GameObject: {fileID: 825131762}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4b99a805706d9e84e95f67e5b316d1aa, type: 2}
+  m_Controller: {fileID: 9100000, guid: 603cfd5b5d7f3fd48a2df1afc15db718, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -102714,9 +102715,11 @@ MonoBehaviour:
   myRigidbody: {fileID: 1509951480}
   mySpriteRenderer: {fileID: 52453382}
   myAnimator: {fileID: 52453381}
-  movementSpeed: 1
   _player: {fileID: 252761587}
   attackRange: 0.4
+  attackPower: 5
+  attackDelay: 2
+  attackTimer: 2
 --- !u!50 &1509951480
 Rigidbody2D:
   serializedVersion: 5
@@ -102732,7 +102735,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -102743,7 +102746,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1649544446
 GameObject:
   m_ObjectHideFlags: 0

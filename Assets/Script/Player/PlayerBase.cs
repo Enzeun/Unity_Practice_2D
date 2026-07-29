@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
 {
+    // 참조용 필드
+    [BoxGroup("Component"), SerializeField, Required]
+    private Animator _myAnimator;
+
+    // 애니메이션 해시
+    private static readonly int DieHash = Animator.StringToHash("IsDead");
+
+
     // 플레이어 스탯 필드
     [BoxGroup("Player Status"), ShowInInspector]
     public float maxHp { get; private set; } = 100f;
@@ -48,9 +56,13 @@ public class PlayerBase : MonoBehaviour
     [BoxGroup("메서드 디버깅"), Button]
     private void Die()
     {
+        if (isDead) return;
+
         canMove = false;
 
         isDead = true;
+
+        _myAnimator.SetBool(DieHash, isDead);
 
         OnDie?.Invoke();
     }
