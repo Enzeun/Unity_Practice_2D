@@ -1,4 +1,6 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
@@ -11,6 +13,26 @@ public class PlayerBase : MonoBehaviour
     [BoxGroup("Player Status"), ShowInInspector]
     public bool isDead { get; private set; } = false;
     [BoxGroup("Player Status"), ShowInInspector]
-    public bool canMove {  get; private set; } = false;
+    public bool canMove { get; private set; } = false;
 
+    [BoxGroup("Require!!"), SerializeField, Required]
+    private DOTweenAnimation myDOTween;
+
+
+
+    // 데미지 입는 곳
+    public void TakeDamage(float damage)
+    {
+        if (isDead) return;
+
+        hp = Mathf.Clamp(hp - damage, 0, maxHp);
+
+        PlayHurtAnimation();
+    }
+
+    [ButtonGroup("메서드 디버깅")]
+    private void PlayHurtAnimation()
+    {
+        myDOTween.DORestartAllById("Hurt");
+    }
 }
