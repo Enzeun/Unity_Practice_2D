@@ -12,16 +12,17 @@ public class PlayerMovement : MonoBehaviour
     [BoxGroup("Components"), SerializeField, Required]
     private Animator _animator;
     [BoxGroup("Components"), SerializeField, Required]
-    private SpriteRenderer _characterRenderer;
+    private Component _characterRoot;
 
+    [BoxGroup("디버깅"), ShowInInspector, ReadOnly]
     private InputManager inputInstance;
 
     [BoxGroup("플레이어 상태")]
     public bool canMove = true;
-    [BoxGroup("플레이어 상태"), SerializeField] 
-    private float movementSpeed = 8f;
+    [BoxGroup("플레이어 상태"), SerializeField]
+    private float movementSpeed = 3f;
     [BoxGroup("플레이어 상태"), ShowInInspector, ReadOnly]
-    private bool _lookRight = true;
+    private bool _lookRight = false;
     [BoxGroup("플레이어 상태"), ShowInInspector, ReadOnly]
     private bool _isMoving = false;
 
@@ -29,11 +30,12 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
     private float _camOffset;
 
-    private void Awake()
+
+    private void Start()
     {
         inputInstance = InputManager.Instance;
-    }
 
+    }
     void Update()
     {
         // 플레이어 이동 인풋 저장
@@ -93,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         if (_lookRight != shouldLookRight)
         {
             _lookRight = shouldLookRight;
-            _characterRenderer.flipX = !_lookRight;
+            _characterRoot.transform.localScale = _lookRight ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
 
             if (camComposer != null)
             {
