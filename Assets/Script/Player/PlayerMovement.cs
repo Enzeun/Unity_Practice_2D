@@ -16,9 +16,11 @@ public class PlayerMovement : MonoBehaviour
 
     [BoxGroup("디버깅"), ShowInInspector, ReadOnly]
     private InputManager inputInstance;
+    [BoxGroup("디버깅"), SerializeField]
+    private PlayerBase _player;
 
-    [BoxGroup("플레이어 상태")]
-    public bool canMove = true;
+    [BoxGroup("플레이어 상태"), ShowInInspector, ReadOnly]
+    private bool canMove = true;
     [BoxGroup("플레이어 상태"), SerializeField]
     private float movementSpeed = 3f;
     [BoxGroup("플레이어 상태"), ShowInInspector, ReadOnly]
@@ -34,10 +36,11 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         inputInstance = InputManager.Instance;
-
     }
     void Update()
     {
+        canMove = _player.canMove;
+
         // 플레이어 이동 인풋 저장
         if (inputInstance != null)
         {
@@ -49,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
 
         // 플레이어가 바라보는 방향 업데이트
         SetCharacterLookAt();
-
     }
 
     private void FixedUpdate()
@@ -76,7 +78,10 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void SetCharacterMovingAnimation()
     {
+        if (!canMove) return;
+
         bool currentMovingState = _input != Vector2.zero;
+
         if (_isMoving != currentMovingState)
         {
             _isMoving = currentMovingState;
