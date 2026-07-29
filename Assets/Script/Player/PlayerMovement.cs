@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isMoving = false;
 
     private Vector2 _input;
-    private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
+    private static readonly int IsMovingHash = Animator.StringToHash("1_Move");
     private float _camOffset;
 
 
