@@ -517,7 +517,7 @@ InitTestScene*.unity*
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
-/[Aa]ssets/[Ii]mpoirts
+/[Aa]ssets/[Ii]mports
 
 # Crashlytics generated file
 crashlytics-build.properties
