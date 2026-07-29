@@ -168,7 +168,7 @@ Animator:
   m_GameObject: {fileID: 52453379}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0cc6e26786c058148831c9b6b497909c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -102674,6 +102674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1509951477}
   - component: {fileID: 1509951478}
+  - component: {fileID: 1509951480}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -102710,6 +102711,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   myAnim: {fileID: 52453383}
+  myRigidbody: {fileID: 1509951480}
+  mySpriteRenderer: {fileID: 52453382}
+  myAnimator: {fileID: 52453381}
+  movementSpeed: 1
+  _player: {fileID: 252761587}
+  attackRange: 0.4
+--- !u!50 &1509951480
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509951476}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1649544446
 GameObject:
   m_ObjectHideFlags: 0
