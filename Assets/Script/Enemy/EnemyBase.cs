@@ -1,16 +1,23 @@
+using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [BoxGroup("Required Component"), SerializeField, Required]
+    private DOTweenAnimation myAnim;
+
+
+
+    [ButtonGroup("메서드 디버깅")]
+    public void TakeDamage(float damage)
     {
-        
+        PlayHurtAnim();
     }
 
-    // Update is called once per frame
-    void Update()
+    [ButtonGroup("메서드 디버깅")]
+    public void PlayHurtAnim()
     {
-        
+        myAnim.DORestart();
     }
 }

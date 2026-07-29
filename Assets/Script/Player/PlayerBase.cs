@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
@@ -21,6 +20,7 @@ public class PlayerBase : MonoBehaviour
 
 
     // 데미지 입는 곳
+    [ButtonGroup("메서드 디버깅")]
     public void TakeDamage(float damage)
     {
         if (isDead) return;
