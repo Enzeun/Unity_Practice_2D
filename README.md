@@ -21,6 +21,7 @@ Please import them separately after cloning the project.
 - UI
 - 여러 종류의 적 (추가만 하면 됨)
 - 스킬
+- 아이템 (체력회복, 경험치)
 - 이펙트
 - 사운드
 - 게임시작 -> 메인게임 -> 게임오버 루틴
