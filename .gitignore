@@ -1,6 +1,7 @@
 # This Plugins are Paid.
 Assets/Plugins/Sirenix/
 Assets/Plugins/Demigiant/
+Assets/Plugins/DamageNumbersPro/
 
 # Ignore the auto-generated AOT compatibility dll.
 /Assets/Plugins/Sirenix/Assemblies/AOT/*
